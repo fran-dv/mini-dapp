@@ -1,69 +1,69 @@
-# Frontend Challenge
+# React + TypeScript + Vite
 
-Create a **React app** that demonstrates blockchain integration and state management using React Context or Zustand. Keep it clean, simple, and well-structured.
+This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
----
+Currently, two official plugins are available:
 
-## Requirements
+- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
+- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
 
-### Core Features:
+## Expanding the ESLint configuration
 
-1. **Connect Wallet**: Enable wallet connection with RainbowKit, RabbyKit, or Reown.
-2. **Network Detection**: Ensure the app detects the wrong network (e.g., Sepolia) and allows switching chains.
-3. **Token Balances**:
-    - Fetch and display human-readable `DAI` (18 decimals) and `USDC` (6 decimals) balances.
-4. **Approve & Transfer**:
-    - Inputs for specifying approval or transfer amounts.
-    - Buttons for `APPROVE` and `TRANSFER` with validations and error messages (e.g., "Not enough funds").
-5. **Event Table**:
-    - Display transfer and approval events in a table with details (token, amount, sender, recipient, transaction hash).
-6. **Mint Tokens**:
-    - Add a `MINT` button to get test tokens.
-7. **Unit Tests**: Add unit tests to ensure functionality.
+If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
 
-### Bonus Features:
+```js
+export default tseslint.config([
+  globalIgnores(["dist"]),
+  {
+    files: ["**/*.{ts,tsx}"],
+    extends: [
+      // Other configs...
 
-- **State Architecture**: Use a well-structured Zustand/Context store.
-- **E2E Tests**: Add end-to-end tests for key workflows with Cypress.
-- **UI/UX**:
-    - Custom styling or Material-UI.
-    - Responsive design with animations.
-    - Buttons with loading states.
+      // Remove tseslint.configs.recommended and replace with this
+      ...tseslint.configs.recommendedTypeChecked,
+      // Alternatively, use this for stricter rules
+      ...tseslint.configs.strictTypeChecked,
+      // Optionally, add this for stylistic rules
+      ...tseslint.configs.stylisticTypeChecked,
 
----
+      // Other configs...
+    ],
+    languageOptions: {
+      parserOptions: {
+        project: ["./tsconfig.node.json", "./tsconfig.app.json"],
+        tsconfigRootDir: import.meta.dirname,
+      },
+      // other options...
+    },
+  },
+]);
+```
 
-## Tech Stack
+You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
 
-- **Framework**: Next.js or Vite
-- **Routing**: React Router / Next router
-- **State Management**: Zustand / React Context
-- **Blockchain Libraries**: Viem / Wagmi
-- **Wallet Integration**: RainbowKit, RabbyKit, Web3Modal
-- **Code Quality**: Prettier, Linter
-- **Language**: TypeScript
+```js
+// eslint.config.js
+import reactX from "eslint-plugin-react-x";
+import reactDom from "eslint-plugin-react-dom";
 
----
-
-## Tools & Testnet Info
-
-- **Etherscan**: Inspect contracts and methods.
-- **Sepolia Testnet**:
-    - Faucet: [Alchemy](https://www.alchemy.com/faucets/ethereum-sepolia)
-    - ERC20 Contracts:
-        - `DAI`: `0x1D70D57ccD2798323232B2dD027B3aBcA5C00091`
-        - `USDC`: `0xC891481A0AaC630F4D89744ccD2C7D2C4215FD47`
-
----
-
-## Deliverables
-
-1. **Repo**: Clean and organized structure with routes and components with a concise and commit history
-2. **Docs**: A README explaining setup, key decisions, and usage.
-3. **Functionality**:
-    - Fetch balances and allowances.
-    - Approve, Transfer and Mint tokens.
-    - Display event logs in a table.
-
-Note: The commit history will also be taken into account as part of the challenge.
-
-Feel free to add your own creativity and ideas. Let’s see what you build!
+export default tseslint.config([
+  globalIgnores(["dist"]),
+  {
+    files: ["**/*.{ts,tsx}"],
+    extends: [
+      // Other configs...
+      // Enable lint rules for React
+      reactX.configs["recommended-typescript"],
+      // Enable lint rules for React DOM
+      reactDom.configs.recommended,
+    ],
+    languageOptions: {
+      parserOptions: {
+        project: ["./tsconfig.node.json", "./tsconfig.app.json"],
+        tsconfigRootDir: import.meta.dirname,
+      },
+      // other options...
+    },
+  },
+]);
+```
