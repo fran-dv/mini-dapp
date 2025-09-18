@@ -3,7 +3,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: var(--spacing-md) calc(var(--spacing-lg) * 2);
+  padding: var(--spacing-xl) calc(var(--spacing-lg) * 2);
   position: sticky;
   top: 0;
   z-index: 10;
