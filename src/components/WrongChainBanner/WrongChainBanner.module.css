@@ -1,0 +1,45 @@
+.container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100dvw;
+  max-height: 20px;
+  background-color: var(--error);
+  padding: calc(var(--spacing-md) - var(--spacing-xs));
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: var(--spacing-md);
+  z-index: 100;
+
+  @media (width < 900px) {
+    bottom: 0;
+    top: auto;
+    padding: var(--spacing-md);
+    max-height: none;
+  }
+}
+
+.container p {
+  font-weight: 500;
+  font-size: var(--text-sm);
+  color: var(--text-contrast);
+}
+
+.switchButton {
+  border: none;
+  border-radius: var(--border-radius);
+  background-color: var(--error-light);
+  padding: 1px var(--spacing-sm);
+
+  font-weight: 700;
+  font-size: var(--text-sm);
+  color: var(--text-primary);
+
+  &:hover {
+    background-color: var(--background-primary);
+    cursor: pointer;
+  }
+}
