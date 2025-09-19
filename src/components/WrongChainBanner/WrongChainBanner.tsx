@@ -1,7 +1,6 @@
-import { SEPOLIA_CHAIN_ID } from "@config/tokens";
 import { useAccount, useSwitchChain } from "wagmi";
 import styles from "./WrongChainBanner.module.css";
-import { supportedChains } from "@/config/wagmi.config";
+import { supportedChains, defaultChain } from "@/config/wagmi.config";
 
 export const WrongChainBanner: React.FC = () => {
   const { chainId, isConnected } = useAccount();
@@ -15,7 +14,7 @@ export const WrongChainBanner: React.FC = () => {
   }
 
   const handleSwitchChain = () => {
-    switchChain({ chainId: SEPOLIA_CHAIN_ID });
+    switchChain({ chainId: defaultChain.id });
   };
 
   return (
