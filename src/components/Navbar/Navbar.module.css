@@ -3,10 +3,14 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: var(--spacing-xl) calc(var(--spacing-lg) * 2);
+  padding: var(--spacing-xl) calc(var(--spacing-xl) * 2);
   position: sticky;
   top: 0;
   z-index: 10;
+
+  @media (width < 1200px) {
+    padding: var(--spacing-xl) calc(var(--spacing-lg) * 2);
+  }
 
   @media (width < 900px) {
     padding: var(--spacing-md) var(--spacing-lg);
@@ -14,6 +18,10 @@
 
   @media (width < 768px) {
     padding: var(--spacing-md) var(--spacing-md);
+  }
+
+  @media (width < 500px) {
+    padding: var(--spacing-md) var(--spacing-sm);
   }
 }
 
@@ -25,11 +33,18 @@
   align-items: center;
   border-radius: var(--border-radius-lg);
 
-  background: var(--background-glass);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
-  box-shadow: var(--shadow-glass);
-  padding: var(--spacing-md) var(--spacing-lg);
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.2);
+  background: var(--background-surface);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+
+  @media (width < 768px) {
+    padding: var(--spacing-sm);
+  }
+
+  @media (width < 500px) {
+    padding: var(--spacing-sm);
+  }
 }
 
 .navLinks {
@@ -46,17 +61,22 @@
   border-radius: var(--border-radius);
   transition: all 0.2s ease-in-out;
   border: none;
+  background-color: transparent;
 }
 
 .linkButton:hover {
   transform: scale(1.03);
-  background-color: var(--background-secondary);
-  box-shadow: var(--shadow-sm);
+  background-color: var(--background-tertiary);
+  box-shadow: var(--shadow-general);
 }
 
-.linkButton .link {
-  color: var(--text-primary);
+.link {
   text-decoration: none;
   font-weight: 700;
   font-size: var(--text-lg);
+  color: var(--text-primary);
+
+  @media (width < 768px) {
+    font-size: var(--text-base);
+  }
 }
