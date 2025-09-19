@@ -13,7 +13,9 @@
       "@components/*": ["src/components/*"],
       "@routing/*": ["src/routing/*"],
       "@config/*": ["src/config/*"],
-      "@providers/*": ["src/providers/*"]
+      "@providers/*": ["src/providers/*"],
+      "@models/*": ["src/models/*"],
+      "@hooks/*": ["src/hooks/*"]
     },
 
     /* Bundler mode */
