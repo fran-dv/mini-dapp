@@ -2,8 +2,8 @@ import type { TokenMarketData } from "@models/tokens";
 
 const COINGECKO_API_KEY = import.meta.env.VITE_COINGECKO_API_KEY;
 
-export const fetchTokenMarketData = async (coinGeckoId: string) => {
-  const endpoint = `https://api.coingecko.com/api/v3/simple/price?ids=${coinGeckoId}&vs_currencies=usd&include_24hr_change=true`;
+export const fetchTokenMarketData = async (coinGeckoIds: string[]) => {
+  const endpoint = `https://api.coingecko.com/api/v3/simple/price?ids=${coinGeckoIds.join(",")}&vs_currencies=usd&include_24hr_change=true`;
 
   try {
     const response = await fetch(endpoint, {
@@ -18,11 +18,11 @@ export const fetchTokenMarketData = async (coinGeckoId: string) => {
 
     const data = await response.json();
 
-    const parsedData: TokenMarketData = {
+    const parsedData: TokenMarketData[] = coinGeckoIds.map((coinGeckoId) => ({
       coinGeckoId,
       price: data[coinGeckoId].usd ?? 0,
       priceChange24h: data[coinGeckoId].usd_24h_change ?? 0,
-    };
+    }));
 
     return parsedData;
   } catch (err) {

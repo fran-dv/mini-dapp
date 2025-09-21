@@ -2,17 +2,17 @@ import { useQuery } from "@tanstack/react-query";
 import fetchTokenMarketData from "@/api/fetchTokenMarketData";
 
 interface Props {
-  coinGeckoId: string;
+  coinGeckoIds: string[];
   refetchEnabled?: boolean;
 }
 
 export const useTokenMarketData = ({
-  coinGeckoId,
+  coinGeckoIds,
   refetchEnabled = true,
 }: Props) => {
   return useQuery({
-    queryKey: ["token-market-data", coinGeckoId],
-    queryFn: () => fetchTokenMarketData(coinGeckoId),
+    queryKey: ["token-market-data", coinGeckoIds],
+    queryFn: () => fetchTokenMarketData(coinGeckoIds),
     retry: 3,
     retryDelay: (attemptIndex) => Math.min(1000 * 2 ** attemptIndex, 30000),
     staleTime: 2 * 60 * 1000,
