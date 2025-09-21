@@ -1,3 +1,4 @@
+import type { TokenSymbol } from "@config/tokens";
 import type { Abi } from "viem";
 
 export interface TokenConfig {
@@ -14,4 +15,12 @@ export interface TokenMarketData {
   coinGeckoId: string;
   price: number;
   priceChange24h: number;
+}
+
+export interface TokensBalances {
+  [key: TokenSymbol]: string;
+}
+
+export interface TokensDecimals {
+  [key: TokenSymbol]: number;
 }
