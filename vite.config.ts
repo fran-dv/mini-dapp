@@ -15,6 +15,8 @@ export default defineConfig({
       "@providers": path.resolve(__dirname, "./src/providers"),
       "@models": path.resolve(__dirname, "./src/models"),
       "@hooks": path.resolve(__dirname, "./src/hooks"),
+      "@assets": path.resolve(__dirname, "./src/assets"),
+      "@stores": path.resolve(__dirname, "./src/stores"),
     },
   },
 });

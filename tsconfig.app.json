@@ -15,7 +15,9 @@
       "@config/*": ["src/config/*"],
       "@providers/*": ["src/providers/*"],
       "@models/*": ["src/models/*"],
-      "@hooks/*": ["src/hooks/*"]
+      "@hooks/*": ["src/hooks/*"],
+      "@assets/*": ["src/assets/*"],
+      "@stores/*": ["src/stores/*"]
     },
 
     /* Bundler mode */
