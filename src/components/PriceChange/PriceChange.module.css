@@ -1,0 +1,21 @@
+.container {
+  display: flex;
+  align-items: center;
+}
+
+.triangleIcon {
+  width: var(--text-md);
+  height: auto;
+}
+
+.up {
+  color: var(--success);
+}
+
+.down {
+  color: var(--error);
+}
+
+.changePercentage {
+  font-size: var(--text-xs);
+}
