@@ -1,0 +1,108 @@
+.container {
+  width: 100%;
+  max-width: 900px;
+  display: flex;
+  flex-direction: column;
+  box-shadow: var(--shadow-general);
+  background: var(--background-surface);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  padding: var(--spacing-md);
+  padding-top: var(--spacing-lg);
+  border-radius: var(--border-radius);
+  color: var(--text-primary);
+  gap: var(--spacing-lg);
+
+  @media (width < 500px) {
+    padding: var(--spacing-md);
+  }
+}
+
+.topSection {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--spacing-sm);
+
+  @media (width < 500px) {
+    flex-direction: column;
+    gap: var(--spacing-md);
+  }
+}
+
+.infoWrapper {
+  display: flex;
+  gap: var(--spacing-md);
+}
+
+.info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: var(--spacing-xs);
+}
+
+.logoCircle {
+  aspect-ratio: 1;
+  border-radius: 50%;
+  width: 3.5rem;
+  height: auto;
+}
+
+.logoCircle img {
+  width: 100%;
+  height: auto;
+}
+
+.name,
+.balance {
+  font-size: var(--text-lg);
+}
+
+.symbol,
+.price {
+  font-size: var(--text-md);
+
+  @media (width < 500px) {
+    font-size: var(--text-sm);
+  }
+}
+
+.walletInfo {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xs);
+  justify-content: center;
+  position: relative;
+}
+
+.balanceLabel {
+  color: var(--text-secondary);
+  font-size: var(--text-sm);
+  font-weight: 500;
+  position: absolute;
+  left: 0;
+  top: -20%;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+
+  @media (width < 500px) {
+    position: relative;
+    left: 0;
+    top: 0;
+  }
+}
+
+.infoIcon {
+  color: var(--info);
+}
+
+.marketData {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+}
+
+.actionsBoxWrapper {
+  width: 100%;
+}
