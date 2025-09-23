@@ -7,17 +7,23 @@ interface TokensStore {
   areBalancesLoading: boolean;
   tokensBalances: TokensBalances;
   tokensDecimals: TokensDecimals;
+  isFormActionPending: boolean;
+  refreshBalances: () => void;
+  startFormAction: () => void;
+  finishFormAction: () => void;
 }
 
 export const useTokensStore = (): TokensStore => {
-  const { balances, decimals, isLoading } = useTokensData();
+  const { balances, decimals, isLoading, refetchBalances } = useTokensData();
   const {
     setBalances,
     setDecimals,
     setAreBalancesLoading,
+    setIsFormActionPending,
     areBalancesLoading,
     tokensBalances,
     tokensDecimals,
+    isFormActionPending,
   } = useInternalTokensStore();
 
   useEffect(() => {
@@ -37,6 +43,10 @@ export const useTokensStore = (): TokensStore => {
     areBalancesLoading,
     tokensBalances,
     tokensDecimals,
+    isFormActionPending,
+    refreshBalances: () => refetchBalances(),
+    startFormAction: () => setIsFormActionPending(true),
+    finishFormAction: () => setIsFormActionPending(false),
   };
 };
 

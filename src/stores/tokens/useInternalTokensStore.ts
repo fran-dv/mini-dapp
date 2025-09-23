@@ -5,12 +5,14 @@ interface TokensState {
   tokensBalances: TokensBalances;
   tokensDecimals: TokensDecimals;
   areBalancesLoading: boolean;
+  isFormActionPending: boolean;
 }
 
 interface TokensActions {
   setBalances: (balances: TokensBalances) => void;
   setDecimals: (decimals: TokensDecimals) => void;
   setAreBalancesLoading: (areBalancesLoading: boolean) => void;
+  setIsFormActionPending: (isFormActionPending: boolean) => void;
 }
 
 export const useInternalTokensStore = create<TokensState & TokensActions>()(
@@ -18,12 +20,15 @@ export const useInternalTokensStore = create<TokensState & TokensActions>()(
     tokensBalances: {},
     tokensDecimals: {},
     areBalancesLoading: false,
+    isFormActionPending: false,
     setBalances: (balances: TokensBalances) =>
       set({ tokensBalances: balances }),
     setDecimals: (decimals: TokensDecimals) =>
       set({ tokensDecimals: decimals }),
     setAreBalancesLoading: (areBalancesLoading: boolean) =>
       set({ areBalancesLoading }),
+    setIsFormActionPending: (isFormActionPending: boolean) =>
+      set({ isFormActionPending }),
   }),
 );
 

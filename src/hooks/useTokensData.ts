@@ -15,6 +15,7 @@ interface UseTokensDataReturnType {
   decimals: TokensDecimals;
   balances: TokensBalances;
   isLoading: boolean;
+  refetchBalances: () => void;
 }
 
 export const useTokensData = (): UseTokensDataReturnType => {
@@ -36,7 +37,7 @@ export const useTokensData = (): UseTokensDataReturnType => {
   const {
     data: results,
     isLoading: areBalancesLoading,
-    refetch,
+    refetch: refetchBalances,
   }: UseReadContractsReturnType = useReadContracts({
     contracts: contracts,
     query: {
@@ -47,8 +48,8 @@ export const useTokensData = (): UseTokensDataReturnType => {
   const { data: blockNumber } = useBlockNumber({ watch: true });
 
   useEffect(() => {
-    if (blockNumber && Number(blockNumber) % 5 === 0) refetch();
-  }, [blockNumber, refetch]);
+    if (blockNumber && Number(blockNumber) % 5 === 0) refetchBalances();
+  }, [blockNumber, refetchBalances]);
 
   const decimals: TokensDecimals = useMemo(() => {
     const decimals: TokensDecimals = {};
@@ -61,7 +62,7 @@ export const useTokensData = (): UseTokensDataReturnType => {
   }, [results]);
 
   const balances: TokensBalances = useMemo(() => {
-    const balances: TokensBalances = {};
+    const newBalances: TokensBalances = {};
     tokens.map((token, i) => {
       const balanceResult = results?.[i * 2];
       const decimalsResult = results?.[i * 2 + 1];
@@ -71,15 +72,16 @@ export const useTokensData = (): UseTokensDataReturnType => {
 
       const cleanBalance = formatUnits(rawBalance, decimals);
 
-      balances[token.symbol] = cleanBalance;
+      newBalances[token.symbol] = cleanBalance;
     });
-    return balances;
+    return newBalances;
   }, [results]);
 
   return {
     decimals,
     balances,
     isLoading: areBalancesLoading,
+    refetchBalances,
   };
 };
 
