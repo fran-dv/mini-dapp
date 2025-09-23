@@ -1,0 +1,46 @@
+.content {
+  background-color: #fff;
+  display: flex;
+  flex-direction: column;
+  padding: var(--spacing-md);
+  box-shadow: var(--shadow-general);
+  border-radius: var(--border-radius);
+  max-width: 250px;
+}
+
+.content p {
+  font-size: var(--text-sm);
+  color: var(--text-primary);
+  z-index: 1000;
+  font-style: italic;
+}
+
+.content[data-state="open"] {
+  animation: fadeIn 0.2s ease-in;
+}
+
+.content[data-state="closed"] {
+  animation: fadeOut 0.2s ease-in;
+}
+
+.arrow {
+  fill: #fff;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
