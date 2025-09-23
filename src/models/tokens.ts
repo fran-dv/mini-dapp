@@ -17,6 +17,30 @@ export interface TokenMarketData {
   priceChange24h: number;
 }
 
+export type TokenEvent =
+  | {
+      kind: "transfer";
+      token: TokenConfig;
+      txHash: `0x${string}`;
+      blockNumber: bigint;
+      from: `0x${string}`;
+      to: `0x${string}`;
+      amount: bigint;
+      readableAmount: string;
+      timestamp?: Date;
+    }
+  | {
+      kind: "approval";
+      token: TokenConfig;
+      txHash: `0x${string}`;
+      blockNumber: bigint;
+      owner: `0x${string}`;
+      spender: `0x${string}`;
+      amount: bigint;
+      readableAmount: string;
+      timestamp?: Date;
+    };
+
 export interface TokensBalances {
   [key: TokenSymbol]: string;
 }
