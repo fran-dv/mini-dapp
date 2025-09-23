@@ -2,29 +2,35 @@ import { z } from "zod";
 import type { TokenConfig } from "@models/tokens";
 import { ActionForm } from "@components/TokenCard/components/ActionsBox/components/ActionForm";
 import useTransferToken from "@hooks/tokensActions/useTransferToken";
+import useTokensStore from "@stores/tokens/useTokensStore";
 
-const TransferFormSchema = z.object({
-  recipient: z
-    .string({ error: "Please provide a recipient address" })
-    .startsWith("0x", "The recipient address must start with 0x")
-    .regex(
-      /^(0x)?[0-9a-fA-F]{40}$/,
-      "Please provide a valid standard ethereum address",
-    ),
-  amount: z
-    .number({ error: "Please provide an amount" })
-    .nonnegative("The amount must be positive"),
-});
+const getTransferFormSchema = (walletBalance: number) =>
+  z.object({
+    recipient: z
+      .string({ error: "Please provide a recipient address" })
+      .startsWith("0x", "The recipient address must start with 0x")
+      .regex(
+        /^(0x)?[0-9a-fA-F]{40}$/,
+        "Please provide a valid standard ethereum address",
+      ),
+    amount: z
+      .number({ error: "Please provide an amount" })
+      .nonnegative("The amount must be positive")
+      .refine((amount) => amount <= walletBalance, "Not enough funds"),
+  });
 
 interface Props {
   token: TokenConfig;
-  defaultValues?: Partial<z.infer<typeof TransferFormSchema>>;
+  defaultValues?: Partial<z.infer<ReturnType<typeof getTransferFormSchema>>>;
 }
 
 export const TransferForm = ({ token, defaultValues }: Props) => {
   const { transfer, isPending } = useTransferToken();
+  const { tokensBalances } = useTokensStore();
 
-  const transferCallback = (values: z.infer<typeof TransferFormSchema>) => {
+  const transferCallback = (
+    values: z.infer<ReturnType<typeof getTransferFormSchema>>,
+  ) => {
     return transfer({
       token,
       recipient: values.recipient,
@@ -35,7 +41,7 @@ export const TransferForm = ({ token, defaultValues }: Props) => {
   return (
     <ActionForm
       actionName="transfer"
-      schema={TransferFormSchema}
+      schema={getTransferFormSchema(Number(tokensBalances[token.symbol]))}
       fields={[
         {
           name: "recipient",

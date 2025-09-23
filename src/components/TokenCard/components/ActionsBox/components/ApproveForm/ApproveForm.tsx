@@ -2,29 +2,35 @@ import { z } from "zod";
 import type { TokenConfig } from "@models/tokens";
 import useApproveToken from "@hooks/tokensActions/useApproveToken";
 import { ActionForm } from "@components/TokenCard/components/ActionsBox/components/ActionForm";
+import useTokensStore from "@stores/tokens/useTokensStore";
 
-const ApproveFormSchema = z.object({
-  spender: z
-    .string({ error: "Please provide a spender address" })
-    .startsWith("0x", "The spender address must start with 0x")
-    .regex(
-      /^(0x)?[0-9a-fA-F]{40}$/,
-      "Please provide a valid standard ethereum address",
-    ),
-  amount: z
-    .number({ error: "Please provide an amount" })
-    .nonnegative("The amount must be positive"),
-});
+const getApproveFormSchema = (walletBalance: number) =>
+  z.object({
+    spender: z
+      .string({ error: "Please provide a spender address" })
+      .startsWith("0x", "The spender address must start with 0x")
+      .regex(
+        /^(0x)?[0-9a-fA-F]{40}$/,
+        "Please provide a valid standard ethereum address",
+      ),
+    amount: z
+      .number({ error: "Please provide an amount" })
+      .nonnegative("The amount must be positive")
+      .refine((amount) => amount <= walletBalance, "Not enough funds"),
+  });
 
 interface Props {
   token: TokenConfig;
-  defaultValues?: Partial<z.infer<typeof ApproveFormSchema>>;
+  defaultValues?: Partial<z.infer<ReturnType<typeof getApproveFormSchema>>>;
 }
 
 export const ApproveForm = ({ token, defaultValues }: Props) => {
   const { approve, isPending } = useApproveToken();
+  const { tokensBalances } = useTokensStore();
 
-  const approveCallback = (values: z.infer<typeof ApproveFormSchema>) => {
+  const approveCallback = (
+    values: z.infer<ReturnType<typeof getApproveFormSchema>>,
+  ) => {
     return approve({
       token,
       spender: values.spender,
@@ -35,7 +41,7 @@ export const ApproveForm = ({ token, defaultValues }: Props) => {
   return (
     <ActionForm
       actionName="approve"
-      schema={ApproveFormSchema}
+      schema={getApproveFormSchema(Number(tokensBalances[token.symbol]))}
       fields={[
         {
           name: "spender",
