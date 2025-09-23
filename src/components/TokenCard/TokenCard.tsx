@@ -2,7 +2,7 @@ import type { TokenConfig, TokenMarketData } from "@models/tokens";
 import styles from "./TokenCard.module.css";
 import { PriceChange } from "@components/PriceChange";
 import { ActionsBox } from "./components/ActionsBox";
-import { InfoHoverCard } from "./components/InfoHoverCard";
+import { InfoHoverCard } from "@components/InfoHoverCard";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 

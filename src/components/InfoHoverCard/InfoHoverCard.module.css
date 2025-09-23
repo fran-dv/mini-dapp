@@ -6,12 +6,12 @@
   box-shadow: var(--shadow-general);
   border-radius: var(--border-radius);
   max-width: 250px;
+  z-index: 1000;
 }
 
 .content p {
   font-size: var(--text-sm);
   color: var(--text-primary);
-  z-index: 1000;
   font-style: italic;
 }
 
