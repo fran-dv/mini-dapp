@@ -1,0 +1,12 @@
+.button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  color: var(--text-primary);
+}
+
+.button:hover {
+  color: var(--text-secondary);
+}
