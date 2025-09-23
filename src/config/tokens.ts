@@ -1,4 +1,4 @@
-import { erc20Abi } from "viem";
+import { erc20Abi } from "@config/erc20Abi";
 import daiLogo from "@assets/logos/dai.svg";
 import usdcLogo from "@assets/logos/usdc.svg";
 import type { TokenConfig } from "@models/tokens";
