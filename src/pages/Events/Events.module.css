@@ -1,0 +1,104 @@
+.wrapper {
+  width: 100%;
+  display: flex;
+  padding: 0 var(--spacing-xl);
+
+  @media (width < 900px) {
+    padding: 0 var(--spacing-md);
+  }
+
+  @media (width < 500px) {
+    padding: 0 var(--spacing-xs);
+  }
+}
+
+.container {
+  width: 100%;
+  max-width: 1500px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xl);
+  padding-bottom: calc(var(--spacing-xl) * 4);
+
+  @media (width < 500px) {
+    padding: var(--spacing-sm);
+    gap: var(--spacing-md);
+    padding-bottom: calc(var(--spacing-xl) * 4);
+  }
+}
+
+.title {
+  align-self: center;
+  font-size: var(--text-3xl);
+
+  @media (width < 768px) {
+    font-size: var(--text-2xl);
+  }
+
+  @media (width < 500px) {
+    font-size: var(--text-xl);
+  }
+}
+
+.infoIcon {
+  width: var(--text-lg);
+  height: auto;
+  color: var(--info);
+
+  @media (width < 768px) {
+    width: var(--text-base);
+  }
+
+  @media (width < 500px) {
+    width: var(--text-sm);
+  }
+}
+
+.eventsTableContainer {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-sm);
+  overflow-x: auto;
+}
+
+.noEventsMessage,
+.connectWalletMessage {
+  max-width: 600px;
+  align-self: center;
+  text-align: center;
+  font-size: var(--text-lg);
+  margin-top: var(--spacing-lg);
+  font-weight: 600;
+
+  @media (width < 500px) {
+    font-size: var(--text-base);
+  }
+}
+
+.reloadButton {
+  width: fit-content;
+  background-color: transparent;
+  border: none;
+  padding: 0 var(--spacing-md);
+}
+
+.reloadButton .reloadIcon {
+  width: var(--text-lg);
+  height: auto;
+  color: var(--text-primary);
+}
+
+.loading {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
