@@ -2,6 +2,7 @@ import { AppLayout } from "@components/AppLayout";
 import "@rainbow-me/rainbowkit/styles.css";
 import Web3Providers from "./providers/Web3Providers";
 import { Home } from "@pages/Home";
+import { Events } from "@pages/Events";
 import { Paths } from "@routing/paths";
 import { RoutesWithNotFound } from "@routing/RoutesWithNotFound";
 import { Route, Navigate } from "react-router-dom";
@@ -16,6 +17,7 @@ function App() {
             <RoutesWithNotFound>
               <Route path="/" element={<Navigate to={Paths.Home} />} />
               <Route path={Paths.Home} element={<Home />} />
+              <Route path={Paths.Events} element={<Events />} />
             </RoutesWithNotFound>
           </AppLayout>
         </Toast.Provider>
