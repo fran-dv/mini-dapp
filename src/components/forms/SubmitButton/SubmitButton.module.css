@@ -36,7 +36,8 @@
   width: var(--text-3xl);
   height: auto;
   position: absolute;
-  left: -95%;
+  left: 0;
+  transform: translateX(-100%);
 
   @media (width < 500px) {
     width: var(--text-2xl);
