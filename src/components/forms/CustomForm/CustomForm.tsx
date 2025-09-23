@@ -1,45 +1,30 @@
 import {
   FormProvider,
-  useForm,
-  type DefaultValues,
-  type SubmitHandler,
   type FieldValues,
+  type SubmitHandler,
+  type UseFormReturn,
 } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import type { z, ZodType } from "zod";
 import styles from "./CustomForm.module.css";
 
-interface Props<
-  TSchema extends z.ZodTypeAny,
-  TInput extends FieldValues,
-  TOutput = z.output<TSchema>,
-> {
-  schema: TSchema;
-  onSubmit: SubmitHandler<TOutput>;
-  defaultValues?: DefaultValues<TInput>;
+interface Props<T extends FieldValues>
+  extends Omit<React.FormHTMLAttributes<HTMLFormElement>, "onSubmit"> {
+  methods: UseFormReturn<T>;
+  onSubmit: SubmitHandler<T>;
   children: React.ReactNode;
   className?: string;
 }
 
-export const CustomForm = <
-  TSchema extends z.ZodTypeAny,
-  TInput extends FieldValues,
-  TOutput = z.output<TSchema>,
->({
-  schema,
+export const CustomForm = <T extends FieldValues>({
+  methods,
   onSubmit,
-  defaultValues,
   children,
   className = "",
-}: Props<TSchema, TInput, TOutput>) => {
-  const methods = useForm<TInput, unknown, TOutput>({
-    resolver: zodResolver(schema as ZodType<TOutput, TInput>),
-    defaultValues,
-  });
-
+  ...rest
+}: Props<T>) => {
   return (
     <FormProvider {...methods}>
       <form
+        {...rest}
         onSubmit={methods.handleSubmit(onSubmit)}
         className={`${styles.form} ${className}`}
       >
