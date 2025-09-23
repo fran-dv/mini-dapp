@@ -44,6 +44,7 @@
 
   @media (width < 500px) {
     padding: var(--spacing-sm);
+    gap: var(--spacing-xs);
   }
 }
 
@@ -62,12 +63,20 @@
   transition: all 0.2s ease-in-out;
   border: none;
   background-color: transparent;
+
+  @media (width < 500px) {
+    padding: var(--spacing-xs) var(--spacing-sm);
+  }
 }
 
-.linkButton:hover {
+.linkButton:hover:not(:disabled) {
   transform: scale(1.03);
   background-color: var(--background-tertiary);
   box-shadow: var(--shadow-general);
+}
+
+.linkButton:disabled {
+  opacity: 0.5;
 }
 
 .link {
