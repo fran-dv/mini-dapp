@@ -7,22 +7,26 @@ import { Paths } from "@routing/paths";
 import { RoutesWithNotFound } from "@routing/RoutesWithNotFound";
 import { Route, Navigate } from "react-router-dom";
 import * as Toast from "@radix-ui/react-toast";
+import ErrorBoundary from "@components/errors/ErrorBoundary/ErrorBoundary";
+import { ErrorView } from "@components/errors/ErrorView";
 
 function App() {
   return (
-    <div>
-      <Web3Providers>
-        <Toast.Provider swipeDirection="left">
-          <AppLayout>
-            <RoutesWithNotFound>
-              <Route path="/" element={<Navigate to={Paths.Home} />} />
-              <Route path={Paths.Home} element={<Home />} />
-              <Route path={Paths.Events} element={<Events />} />
-            </RoutesWithNotFound>
-          </AppLayout>
-        </Toast.Provider>
-      </Web3Providers>
-    </div>
+    <ErrorBoundary fallback={<ErrorView />}>
+      <div>
+        <Web3Providers>
+          <Toast.Provider swipeDirection="left">
+            <AppLayout>
+              <RoutesWithNotFound>
+                <Route path="/" element={<Navigate to={Paths.Home} />} />
+                <Route path={Paths.Home} element={<Home />} />
+                <Route path={Paths.Events} element={<Events />} />
+              </RoutesWithNotFound>
+            </AppLayout>
+          </Toast.Provider>
+        </Web3Providers>
+      </div>
+    </ErrorBoundary>
   );
 }
 
