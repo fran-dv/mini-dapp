@@ -1,0 +1,33 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: var(--spacing-md);
+  padding: var(--spacing-md);
+  padding-top: 0;
+}
+
+.textContainer {
+  .link {
+    text-decoration: none;
+    color: var(--primary-blue);
+    font-weight: 600;
+    font-size: var(--text-lg);
+  }
+
+  .link:hover {
+    text-decoration: underline;
+  }
+
+  p {
+    font-weight: 500;
+    font-size: var(--text-lg);
+  }
+}
+
+.image {
+  width: 100%;
+  max-width: 350px;
+  height: auto;
+}
