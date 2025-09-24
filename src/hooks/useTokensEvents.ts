@@ -107,3 +107,5 @@ export const useTokensEvents = (): UseTokensEventsReturnType => {
     getEvents,
   };
 };
+
+export default useTokensEvents;
