@@ -8,7 +8,7 @@ import type {
 } from "@models/tokens";
 import { useEffect } from "react";
 
-interface TokensStore {
+export interface TokensStore {
   areBalancesLoading: boolean;
   tokensBalances: TokensBalances;
   tokensDecimals: TokensDecimals;
