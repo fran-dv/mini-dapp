@@ -1,6 +1,6 @@
 import { useToastStore } from "@stores/useToastStore";
 
-interface UseUserMessagesReturnType {
+export interface UseUserMessagesReturnType {
   showError: (message: string) => void;
   showSuccess: (message: string) => void;
 }
