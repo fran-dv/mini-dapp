@@ -17,7 +17,8 @@
       "@models/*": ["src/models/*"],
       "@hooks/*": ["src/hooks/*"],
       "@assets/*": ["src/assets/*"],
-      "@stores/*": ["src/stores/*"]
+      "@stores/*": ["src/stores/*"],
+      "@tests/*": ["src/tests/*"]
     },
 
     /* Bundler mode */
